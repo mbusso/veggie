@@ -5,5 +5,5 @@ import Data.List as L
 
 main = do
     let doc = fromUrl "http://www.legrandpere.com.ar/Bebidas-Bebidas?page=1"
-    bebidas <- runX $ doc >>> css ".pagination [href]" >>> getAttrValue "href"
+    bebidas <- runX $ (doc >>> css ".pagination [href]" >>> getAttrValue "href") >>. init
     mapM_ putStrLn bebidas
