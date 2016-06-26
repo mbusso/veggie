@@ -1,9 +1,5 @@
---import Scrap as Scrap
-import Text.XML.HXT.Core 
-import Text.HandsomeSoup
-import Data.List as L
+import Scrap as Scrap
 
 main = do
-    let doc = fromUrl "http://www.legrandpere.com.ar/Bebidas-Bebidas?page=1"
-    bebidas <- runX $ (doc >>> css ".pagination [href]" >>> getAttrValue "href") >>. init
-    mapM_ putStrLn bebidas
+    bebidasLinks <- Scrap.getBebidasLinks "http://www.legrandpere.com.ar/Bebidas-Bebidas"
+    mapM_ putStrLn bebidasLinks
