@@ -1,4 +1,4 @@
-module Scrap (getBazarProducts, getBebidasLinks) where
+module Scrap (getBazarProducts, getBebidasLinks, getBebidas) where
 
 import Text.XML.HXT.Core 
 import Text.HandsomeSoup as HandsomeSoup
@@ -22,3 +22,6 @@ getBazarProducts x = runX $ (getDocument x >>> productsSelector /> getText) >>. 
 
 getBebidasLinks:: String -> IO[String]
 getBebidasLinks x = runX $ (getDocument x >>> css ".pagination [href]" >>> getAttrValue "href"  ) >>. L.init
+
+getBebidas:: [String] -> IO[String]
+getBebidas x = L.concat (L.map getBazarProducts x)
