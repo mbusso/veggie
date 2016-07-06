@@ -23,5 +23,5 @@ getBazarProducts x = runX $ (getDocument x >>> productsSelector /> getText) >>. 
 getBebidasLinks:: String -> IO[String]
 getBebidasLinks x = runX $ (getDocument x >>> css ".pagination [href]" >>> getAttrValue "href"  ) >>. L.init
 
-getBebidas:: [String] -> IO[String]
-getBebidas x = L.concat (L.map getBazarProducts x)
+getBebidas:: [String] -> IO[[String]]
+getBebidas x = sequence (L.map getBazarProducts x)
